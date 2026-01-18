@@ -11,11 +11,14 @@ async function main() {
   await db.delete(tickets);
   await db.delete(events);
 
-  const [event] = await db.insert(events).values({
-    name: "Concurrency Test Event",
-    totalTickets: 10,
-    startDate: new Date(Date.now() + 24 * 60 * 60 * 1000),
-  }).returning();
+  const [event] = await db
+    .insert(events)
+    .values({
+      name: "Concurrency Test Event",
+      totalTickets: 10,
+      startDate: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    })
+    .returning();
 
   const ticketValues = Array.from({ length: 10 }).map(() => ({
     eventId: event.id,
@@ -40,24 +43,15 @@ async function main() {
   console.log(`Failures: ${failures}`);
 
   // 5. Verify DB state
-  const availableCount = await db
-    .select()
-    .from(tickets)
-    .where(eq(tickets.status, "AVAILABLE"));
+  const availableCount = await db.select().from(tickets).where(eq(tickets.status, "AVAILABLE"));
 
-  const heldCount = await db
-    .select()
-    .from(tickets)
-    .where(eq(tickets.status, "HELD"));
+  const heldCount = await db.select().from(tickets).where(eq(tickets.status, "HELD"));
 
   console.log(`DB State - AVAILABLE: ${availableCount.length}, HELD: ${heldCount.length}`);
 
   // Verification checks
   const isCorrect =
-    successes === 10 &&
-    failures === 40 &&
-    availableCount.length === 0 &&
-    heldCount.length === 10;
+    successes === 10 && failures === 40 && availableCount.length === 0 && heldCount.length === 10;
 
   if (isCorrect) {
     console.log("✅ CONCURRENCY TEST PASSED: Zero overselling confirmed.");

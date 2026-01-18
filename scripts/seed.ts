@@ -10,11 +10,14 @@ async function main() {
   await db.delete(events);
 
   // Create test event
-  const [event] = await db.insert(events).values({
-    name: "Test Concurrency Event",
-    totalTickets: 100,
-    startDate: new Date(Date.now() + 24 * 60 * 60 * 1000), // tomorrow
-  }).returning();
+  const [event] = await db
+    .insert(events)
+    .values({
+      name: "Test Concurrency Event",
+      totalTickets: 100,
+      startDate: new Date(Date.now() + 24 * 60 * 60 * 1000), // tomorrow
+    })
+    .returning();
 
   console.log(`Created event: ${event.id}`);
 

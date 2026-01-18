@@ -12,14 +12,9 @@ export async function reserveTicket(eventId: string, quantity: number) {
     const availableTickets = await tx
       .select({ id: tickets.id })
       .from(tickets)
-      .where(
-        and(
-          eq(tickets.eventId, eventId),
-          eq(tickets.status, "AVAILABLE")
-        )
-      )
+      .where(and(eq(tickets.eventId, eventId), eq(tickets.status, "AVAILABLE")))
       .limit(quantity)
-      .for('update', { skipLocked: true });
+      .for("update", { skipLocked: true });
 
     if (availableTickets.length < quantity) {
       throw new Error("SOLD OUT");

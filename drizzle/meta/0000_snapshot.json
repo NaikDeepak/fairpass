@@ -142,12 +142,8 @@
           "name": "tickets_event_id_events_id_fk",
           "tableFrom": "tickets",
           "tableTo": "events",
-          "columnsFrom": [
-            "event_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["event_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -163,21 +159,12 @@
     "public.booking_status": {
       "name": "booking_status",
       "schema": "public",
-      "values": [
-        "PENDING",
-        "COMPLETED",
-        "EXPIRED",
-        "CANCELLED"
-      ]
+      "values": ["PENDING", "COMPLETED", "EXPIRED", "CANCELLED"]
     },
     "public.ticket_status": {
       "name": "ticket_status",
       "schema": "public",
-      "values": [
-        "AVAILABLE",
-        "HELD",
-        "SOLD"
-      ]
+      "values": ["AVAILABLE", "HELD", "SOLD"]
     }
   },
   "schemas": {},

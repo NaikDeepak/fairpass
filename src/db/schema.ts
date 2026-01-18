@@ -1,18 +1,7 @@
-import {
-  pgTable,
-  uuid,
-  text,
-  integer,
-  timestamp,
-  pgEnum,
-} from "drizzle-orm/pg-core";
+import { pgTable, uuid, text, integer, timestamp, pgEnum } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
-export const ticketStatusEnum = pgEnum("ticket_status", [
-  "AVAILABLE",
-  "HELD",
-  "SOLD",
-]);
+export const ticketStatusEnum = pgEnum("ticket_status", ["AVAILABLE", "HELD", "SOLD"]);
 
 export const bookingStatusEnum = pgEnum("booking_status", [
   "PENDING",
