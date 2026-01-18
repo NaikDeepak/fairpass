@@ -10,8 +10,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Surge Protection
 
 - [ ] **SURGE-01**: System queues users in a Redis-backed Waiting Room when traffic exceeds capacity.
-- [ ] **SURGE-02**: Users receive real-time updates on their queue position (via SSE/polling).
-- [ ] **SURGE-03**: Bot mitigation (Cloudflare Turnstile) challenges users before queue entry.
+- [ ] **SURGE-02**: Users receive queue position updates via polling (safer under surge than SSE).
 - [ ] **SURGE-04**: Queue ordering enforces fair-share based on server-side arrival time.
 
 ### Booking Engine
@@ -20,23 +19,26 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **BOOK-02**: Selected tickets are locked for a specific duration (e.g., 5 minutes) while user pays (Session Locking).
 - [ ] **BOOK-03**: System performs a final inventory heartbeat check immediately before payment initialization.
 - [ ] **BOOK-04**: Expired ticket holds are automatically released back to the pool (Auto-Release Logic).
+- [ ] **BOOK-05**: Booking intent creation is idempotent per client session.
 
 ### Checkout & Payments
 
 - [ ] **PAY-01**: Users can complete booking as guests (Name, Email, Phone) without password authentication.
 - [ ] **PAY-02**: Razorpay payment integration handles success/failure with strict idempotency (Webhook verification).
 - [ ] **PAY-03**: System calculates and logs a flat ₹25 fee per successful booking (hidden from attendee).
+- [ ] **PAY-04**: Payment success state is derived from server-side verification, not client redirect.
 
 ### Admin & Communications
 
-- [ ] **ADM-01**: Organizer can view current booking counts and export participant list via Admin Interface.
-- [ ] **COMM-01**: System sends async confirmation Emails (AWS SES) and SMS (Twilio) after successful payment.
+- [ ] **ADM-01**: Organizer can view total bookings/capacity and export CSV (no charts/filters).
+- [ ] **COMM-01**: System sends async confirmation via AWS SES (Email) and Twilio (SMS).
 
 ## v2 Requirements
 
 Deferred to future release. Tracked but not in current roadmap.
 
 ### Surge Advanced
+- **SURGE-03**: Bot mitigation (Cloudflare Turnstile) challenges users before queue entry.
 - **SURGE-05**: Instant Failover (Graceful 'Sold Out' state at Edge without hitting DB).
 
 ### Infrastructure
@@ -65,21 +67,22 @@ Which phases cover which requirements. Updated by create-roadmap.
 |-------------|-------|--------|
 | SURGE-01 | Phase 2 | Pending |
 | SURGE-02 | Phase 3 | Pending |
-| SURGE-03 | Phase 2 | Pending |
 | SURGE-04 | Phase 2 | Pending |
 | BOOK-01 | Phase 1 | Pending |
 | BOOK-02 | Phase 4 | Pending |
 | BOOK-03 | Phase 4 | Pending |
 | BOOK-04 | Phase 4 | Pending |
+| BOOK-05 | Phase 4 | Pending |
 | PAY-01 | Phase 5 | Pending |
 | PAY-02 | Phase 6 | Pending |
 | PAY-03 | Phase 6 | Pending |
+| PAY-04 | Phase 6 | Pending |
 | ADM-01 | Phase 8 | Pending |
 | COMM-01 | Phase 7 | Pending |
 
 **Coverage:**
-- v1 requirements: 13 total
-- Mapped to phases: 13
+- v1 requirements: 14 total
+- Mapped to phases: 14
 - Unmapped: 0 ✓
 
 ---

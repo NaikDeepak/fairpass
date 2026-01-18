@@ -37,37 +37,36 @@ This roadmap defines the path to building a high-reliability, surge-safe booking
 ### Phase 2: Waiting Room Core
 **Goal**: Protect the database from surge traffic using a Redis-backed gatekeeper.
 **Depends on**: Phase 1
-**Requirements**: SURGE-01, SURGE-03, SURGE-04
+**Requirements**: SURGE-01, SURGE-04
 **Success Criteria** (what must be TRUE):
   1. Requests exceeding defined capacity are intercepted at the Middleware level.
   2. Redis correctly stores and retrieves queue positions using FIFO ordering.
-  3. Cloudflare Turnstile successfully challenges suspicious requests.
-  4. Validated tokens allow access to protected routes.
+  3. Validated tokens allow access to protected routes.
 **Research**: Likely (Redis Lua)
 **Research topics**: Upstash Redis Lua scripts for atomic queue operations, Next.js Middleware patterns.
 **Plans**: 3 plans
 
 ### Phase 3: Queue Experience
-**Goal**: Keep queued users informed to reduce anxiety and page refreshes.
+**Goal**: Keep queued users informed via robust polling (avoiding connection limits).
 **Depends on**: Phase 2
 **Requirements**: SURGE-02
 **Success Criteria** (what must be TRUE):
   1. Users in queue see their dynamic position number.
-  2. Queue position updates automatically without page reload (SSE).
+  2. Queue position updates via polling mechanism (no WebSocket fragility).
   3. "You are next" state transitions user to booking flow.
-**Research**: Likely (SSE)
-**Research topics**: Implementing Server-Sent Events in Next.js App Router (Route Handlers).
+**Research**: Unlikely (Standard Polling)
 **Plans**: 2 plans
 
 ### Phase 4: Session Management
 **Goal**: Manage the temporary reservation state while users prepare to pay.
 **Depends on**: Phase 1 (DB), Phase 2 (Gate)
-**Requirements**: BOOK-02, BOOK-03, BOOK-04
+**Requirements**: BOOK-02, BOOK-03, BOOK-04, BOOK-05
 **Success Criteria** (what must be TRUE):
   1. "Booking Intent" record is created with a 5-minute expiration.
-  2. Inventory is tentatively held during the active session.
-  3. Expired sessions automatically release inventory back to the pool.
-  4. Heartbeat check prevents payment initialization if session expired.
+  2. Booking intent creation is idempotent per session (prevent duplicate holds).
+  3. Inventory is tentatively held during the active session.
+  4. Expired sessions automatically release inventory back to the pool.
+  5. Heartbeat check prevents payment initialization if session expired.
 **Research**: Unlikely (Standard Redis/DB patterns)
 **Plans**: 2 plans
 
@@ -85,12 +84,13 @@ This roadmap defines the path to building a high-reliability, surge-safe booking
 ### Phase 6: Payment Integration
 **Goal**: Process payments reliably with strict protection against duplicate charges.
 **Depends on**: Phase 5
-**Requirements**: PAY-02, PAY-03
+**Requirements**: PAY-02, PAY-03, PAY-04
 **Success Criteria** (what must be TRUE):
   1. Razorpay checkout modal launches successfully.
   2. Webhooks verify cryptographic signatures before processing.
   3. Idempotency logic prevents processing the same payment twice.
   4. Hidden ₹25 fee is correctly calculated and logged.
+  5. Success page renders based on server verification, not client redirect.
 **Research**: Likely (Razorpay Webhooks)
 **Research topics**: Razorpay Node.js SDK, Webhook signature verification, Idempotency keys.
 **Plans**: 3 plans
