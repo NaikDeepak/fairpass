@@ -68,7 +68,7 @@ Which phases cover which requirements. Updated by create-roadmap.
 | SURGE-01 | Phase 2 | Pending |
 | SURGE-02 | Phase 3 | Pending |
 | SURGE-04 | Phase 2 | Pending |
-| BOOK-01 | Phase 1 | Pending |
+| BOOK-01 | Phase 1 | Complete |
 | BOOK-02 | Phase 4 | Pending |
 | BOOK-03 | Phase 4 | Pending |
 | BOOK-04 | Phase 4 | Pending |
