@@ -63,24 +63,24 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SURGE-01 | Phase [N] | Pending |
-| SURGE-02 | Phase [N] | Pending |
-| SURGE-03 | Phase [N] | Pending |
-| SURGE-04 | Phase [N] | Pending |
-| BOOK-01 | Phase [N] | Pending |
-| BOOK-02 | Phase [N] | Pending |
-| BOOK-03 | Phase [N] | Pending |
-| BOOK-04 | Phase [N] | Pending |
-| PAY-01 | Phase [N] | Pending |
-| PAY-02 | Phase [N] | Pending |
-| PAY-03 | Phase [N] | Pending |
-| ADM-01 | Phase [N] | Pending |
-| COMM-01 | Phase [N] | Pending |
+| SURGE-01 | Phase 2 | Pending |
+| SURGE-02 | Phase 3 | Pending |
+| SURGE-03 | Phase 2 | Pending |
+| SURGE-04 | Phase 2 | Pending |
+| BOOK-01 | Phase 1 | Pending |
+| BOOK-02 | Phase 4 | Pending |
+| BOOK-03 | Phase 4 | Pending |
+| BOOK-04 | Phase 4 | Pending |
+| PAY-01 | Phase 5 | Pending |
+| PAY-02 | Phase 6 | Pending |
+| PAY-03 | Phase 6 | Pending |
+| ADM-01 | Phase 8 | Pending |
+| COMM-01 | Phase 7 | Pending |
 
 **Coverage:**
 - v1 requirements: 13 total
-- Mapped to phases: 0
-- Unmapped: 13 ⚠️
+- Mapped to phases: 13
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-01-18*
